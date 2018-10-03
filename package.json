@@ -1,0 +1,20 @@
+{
+  "name": "dendra-wordpress-plugin",
+  "version": "1.0.0",
+  "description": "WordPress plugin for displaying weather station data.",
+  "license": "BSD-2-Clause-FreeBSD",
+  "author": "J. Scott Smith <scott@newleafsolutionsinc.com>",
+  "scripts": {
+    "archive": "cwd=$(pwd) && mkdir -p archive && cp -R dist/ archive/dendra && ( cd archive && zip -rm dendra.zip dendra ) && cd \"$cwd\"",
+    "build": "npm run build-server && npm run copy-server && npm run build-client && npm run copy-client",
+    "build-client": "cwd=$(pwd) && ( cd dev/client; npm run build; exit 0; ) && cd \"$cwd\"",
+    "build-server": "cwd=$(pwd) && ( cd dev/server; npm run build; exit 0; ) && cd \"$cwd\"",
+    "clean": "rm -rf archive/* && rm -rf dist/*",
+    "copy-client": "cp dev/client/dist/dendraClient.umd.min.* dist/public/js/ && cp dev/client/dist/dendraClient.css dist/public/css/",
+    "copy-server": "cp -R dev/server/dist/ dist",
+    "make": "npm run clean && npm run build && npm run archive",
+    "plugin-install": "cwd=$(pwd) && ( cd wp-compose; cp \"$cwd/archive/dendra.zip\" wp-content/uploads/; wp plugin install --activate /var/www/html/wp-content/uploads/dendra.zip; exit 0; ) && cd \"$cwd\"",
+    "plugin-uninstall": "cwd=$(pwd) && ( cd wp-compose; wp plugin uninstall --deactivate dendra; exit 0; ) && cd \"$cwd\"",
+    "serve-client": "cwd=$(pwd) && ( cd dev/client; npm run serve; exit 0; ) && cd \"$cwd\""
+  }
+}

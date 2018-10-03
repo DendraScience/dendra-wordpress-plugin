@@ -1,0 +1,11 @@
+{
+  "name": "dendra-wordpress-plugin-server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npm run clean && cp -R src/ dist",
+    "clean": "rm -rf dist/*"
+  },
+  "author": "",
+  "license": "ISC"
+}

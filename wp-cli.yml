@@ -1,0 +1,2 @@
+# Global parameter defaults
+ssh: docker:root@wp-compose_wordpress_1
