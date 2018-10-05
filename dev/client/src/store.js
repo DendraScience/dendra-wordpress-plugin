@@ -92,16 +92,17 @@ const plugins = [
   })
 ]
 
-const createStore = () => {
+const createStore = (state) => {
   return new Vuex.Store({
     plugins,
 
-    state: {
+    state: Object.assign({
+    }, state),
 
-    },
     mutations: {
 
     },
+
     actions: {
 
     }

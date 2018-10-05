@@ -1,18 +1,29 @@
 import Vue from 'vue'
-import Weather from './apps/Weather.vue'
 import createStore from './store'
 
 Vue.config.productionTip = false
 
-function mount (className, App) {
-  const els = document.getElementsByClassName(className)
+function mount (element) {
+  const data = JSON.parse(JSON.stringify(element.dataset))
 
-  Array.prototype.filter.call(els, el => el.nodeName === 'DIV').forEach(div => {
-    new Vue({
-      store: createStore(),
-      render: h => h(App)
-    }).$mount(div)
+  if (!data.tag) return Promise.reject(new Error('Attribute data-tag undefined'))
+
+  return import(/* webpackMode: "eager" */ `./apps/${data.tag}.vue`).then(module => {
+    return {
+      app: new Vue({
+        store: createStore(data),
+        render: h => h(module.default)
+      }).$mount(element),
+
+      tag: data.tag
+    }
   })
 }
 
-mount('dendra-weather-app', Weather)
+Array.prototype.filter.call(document.getElementsByClassName('dendra-app'), el => el.nodeName === 'DIV').forEach(div => {
+  mount(div).then(({tag}) => {
+    console.info(`Mounted ${tag}`)
+  }).catch(err => {
+    console.error(err.message)
+  })
+})

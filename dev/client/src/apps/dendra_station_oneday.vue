@@ -1,5 +1,5 @@
 <template>
-  <div class="dendra-weather-app">
+  <div class="dendra-app dendra-station-oneday">
 
     <section v-for="station in stations" :key="station._id">
 
@@ -21,7 +21,7 @@
 
 <script>
 import StationAggregates from '@/components/StationAggregates'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import { avgByDayForMonth, sumByDayForMonth } from '@/lib/aggregate-factory'
 
 export default {
@@ -31,9 +31,7 @@ export default {
 
   data () {
     return {
-      isFetchPending: false,
-
-      slugs: ['anza-borrego']
+      isFetchPending: false
     }
   },
 
@@ -47,12 +45,9 @@ export default {
       findStations: 'stations/find'
     }),
 
-    datastreams () {
-      const { station } = this
-      if (station) {
-        return station.datastreams.sort((a, b) => a.tagKey.localeCompare(b.tagKey))
-      }
-    },
+    ...mapState({
+      slug: 'attSlug'
+    }),
 
     stations () {
       return this.findStations({ query: this.stationsQuery }).data
@@ -60,7 +55,8 @@ export default {
 
     stationsQuery () {
       return {
-        slug: { $in: this.slugs }
+        slug: this.slug || '',
+        $limit: 1
       }
     }
   },

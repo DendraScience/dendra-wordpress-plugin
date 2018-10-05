@@ -115,12 +115,27 @@ class Dendra_Public {
 
 	}
 
-	public function render_weather_shortcode( $atts ) {
+	public function register_shortcodes() {
+
+		add_shortcode( 'dendra_station_month_table', array( $this, 'render_shortcode' ) );
+		add_shortcode( 'dendra_station_oneday', array( $this, 'render_shortcode' ) );
+
+	}
+
+	public function render_shortcode( $atts = [], $content = null, $tag = '' ) {
 
 		wp_enqueue_script( $this->plugin_name . '-vue' );
 		wp_enqueue_script( $this->plugin_name . '-client' );
 
-		return '<div class="dendra-weather"><div class="dendra-weather-app" /></div>';
+		$dataset = array_reduce(
+        	array_keys($atts),
+        	function ($carry, $key) use ($atts) {
+            	return $carry . ' data-att-' . $key . '="' . esc_attr( $atts[$key] ) . '"';
+        	},
+        	'data-tag="' . esc_attr( $tag ) . '"'
+    	);
+
+		return '<div class="dendra"><div class="dendra-app" ' . $dataset . ' /></div>';
 
 	}
 

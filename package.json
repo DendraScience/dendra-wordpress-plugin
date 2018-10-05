@@ -15,6 +15,8 @@
     "make": "npm run clean && npm run build && npm run archive",
     "plugin-install": "cwd=$(pwd) && ( cd wp-compose; cp \"$cwd/archive/dendra.zip\" wp-content/uploads/; wp plugin install --activate /var/www/html/wp-content/uploads/dendra.zip; exit 0; ) && cd \"$cwd\"",
     "plugin-uninstall": "cwd=$(pwd) && ( cd wp-compose; wp plugin uninstall --deactivate dendra; exit 0; ) && cd \"$cwd\"",
-    "serve-client": "cwd=$(pwd) && ( cd dev/client; npm run serve; exit 0; ) && cd \"$cwd\""
+    "serve-client": "cwd=$(pwd) && ( cd dev/client; npm run serve; exit 0; ) && cd \"$cwd\"",
+    "wp-down": "cwd=$(pwd) && ( cd wp-compose; docker-compose down; exit 0; ) && cd \"$cwd\"",
+    "wp-up": "cwd=$(pwd) && ( cd wp-compose; docker-compose up -d; exit 0; ) && cd \"$cwd\""
   }
 }
