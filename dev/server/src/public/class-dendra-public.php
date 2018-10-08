@@ -117,8 +117,8 @@ class Dendra_Public {
 
 	public function register_shortcodes() {
 
-		add_shortcode( 'dendra_station_month_table', array( $this, 'render_shortcode' ) );
-		add_shortcode( 'dendra_station_oneday', array( $this, 'render_shortcode' ) );
+		// add_shortcode( 'dendra_station_month_table', array( $this, 'render_shortcode' ) );
+		add_shortcode( 'dendra_station_conditions', array( $this, 'render_shortcode' ) );
 
 	}
 

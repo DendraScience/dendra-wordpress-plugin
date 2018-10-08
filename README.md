@@ -14,6 +14,14 @@ WordPress plugin for displaying weather station data.
 
 * Requires [WP-CLI](https://make.wordpress.org/cli/handbook/installing/). Example `brew install wp-cli`.
 
+* Shortcodes
+
+  * dendra_station_conditions
+  * dendra_station_month
+  * dendra_station_month_table
+  * dendra_variable_month
+  * dendra_variable_week_graph
+
 ## Snippets
 
 ```

@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import createStore from './store'
+import { degreesToName } from './lib/utils'
 
 Vue.config.productionTip = false
+
+Vue.filter('degreesToName', degreesToName)
 
 function mount (element) {
   const data = JSON.parse(JSON.stringify(element.dataset))

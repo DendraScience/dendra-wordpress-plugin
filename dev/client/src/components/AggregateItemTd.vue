@@ -1,5 +1,7 @@
 <template>
-  <td>{{ value }}</td>
+  <td v-if="!aggReq">&ndash;</td>
+  <td v-else-if="aggReq.isPending">Calculating...</td>
+  <td v-else>{{ value }} {{ abbreviation }}</td>
 </template>
 
 <script>
@@ -16,6 +18,11 @@ export default {
     ...mapGetters({
       getAggregateRequest: 'aggregateRequest/get'
     }),
+
+    abbreviation () {
+      const { aggReq } = this
+      if (aggReq && aggReq.datastream) return aggReq.datastream.abbreviation
+    },
 
     aggReq () {
       return this.getAggregateRequest(this.id)
@@ -34,7 +41,7 @@ export default {
 
     value () {
       const { item } = this
-      if (item) return item[this.field].value
+      return item ? item[this.field].value : '(no value)'
     }
   }
 }
