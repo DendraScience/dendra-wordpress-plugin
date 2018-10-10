@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       http://example.com
+ * @link       http://dendra.science
  * @since      1.0.0
  *
  * @package    Dendra
@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Dendra
  * @subpackage Dendra/includes
- * @author     Your Name <email@example.com>
+ * @author     J. Scott Smith <scott@newleafsolutionsinc.com>
  */
 class Dendra_Deactivator {
 

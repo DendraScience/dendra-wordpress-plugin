@@ -161,25 +161,22 @@ const plugins = [
   })
 ]
 
-const createStore = (state) => {
-  return new Vuex.Store({
-    plugins,
+export default new Vuex.Store({
+  plugins
 
-    state: Object.assign({
-    }, state)
+  // state: {
 
-    // getters: {
+  // },
 
-    // },
+  // getters: {
 
-    // mutations: {
+  // },
 
-    // },
+  // mutations: {
 
-    // actions: {
+  // },
 
-    // }
-  })
-}
+  // actions: {
 
-export default createStore
+  // }
+})

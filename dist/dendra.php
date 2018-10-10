@@ -8,19 +8,19 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link              http://dendra.science
  * @since             1.0.0
  * @package           Dendra
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
- * Plugin URI:        http://example.com/dendra-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       Dendra
+ * Plugin URI:        https://github.com/DendraScience/dendra-wordpress-plugin
+ * Description:       Shortcodes for displaying environmental sensor data stored in Dendra -- a cyberinfrastructure project for real-time sensor data storage, retrieval, management, and curation.
  * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Author:            Dendra
+ * Author URI:        http://dendra.science/
+ * License:           BSD-2-Clause-FreeBSD
+ * License URI:       https://opensource.org/licenses/BSD-2-Clause
  * Text Domain:       dendra
  * Domain Path:       /languages
  */

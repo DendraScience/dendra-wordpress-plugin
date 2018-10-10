@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://example.com
+ * @link       http://dendra.science
  * @since      1.0.0
  *
  * @package    Dendra
@@ -22,7 +22,7 @@
  * @since      1.0.0
  * @package    Dendra
  * @subpackage Dendra/includes
- * @author     Your Name <email@example.com>
+ * @author     J. Scott Smith <scott@newleafsolutionsinc.com>
  */
 class Dendra_i18n {
 

@@ -19,9 +19,8 @@
 </template>
 
 <script>
-import moment from 'moment'
 import StationConditions from '@/components/StationConditions'
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { currYTDPrecip, twoDayPrecip } from '@/lib/aggregate-factory'
 
 export default {
@@ -36,7 +35,7 @@ export default {
   },
 
   mounted () {
-    this.fetch()
+    this.seqPush(this.fetch)
   },
 
   computed: {
@@ -46,10 +45,6 @@ export default {
       findStations: 'stations/find'
     }),
 
-    ...mapState({
-      slug: 'attSlug'
-    }),
-
     stations () {
       return this.findStations({ query: this.stationsQuery }).data
     },
@@ -57,7 +52,7 @@ export default {
     stationsQuery () {
       return {
         enabled: true,
-        slug: this.slug || '',
+        slug: this.dataset.attSlug || '',
         $limit: 1
       }
     }
@@ -79,7 +74,7 @@ export default {
 
       this.timerId = setTimeout(() => {
         this.timerId = null
-        this.fetch()
+        this.seqPush(this.fetch)
       }, interval)
     },
 
@@ -90,6 +85,8 @@ export default {
       const stationsRes = await this.fetchStations({ query: this.stationsQuery })
 
       const { AggregateRequest } = this.$FeathersVuex
+
+      let isAggPending = false
 
       for (const station of stationsRes.data) {
         const time = station.currentTime.clone().subtract(24, 'h').toISOString()
@@ -168,6 +165,8 @@ export default {
             }
           })
 
+          if (aggReq.isPending) isAggPending = true
+
           aggReq = new AggregateRequest(twoDayPrecip({
             datastreamId: datastream._id,
             offsetEdit
@@ -179,6 +178,8 @@ export default {
               datastream
             }
           })
+
+          if (aggReq.isPending) isAggPending = true
         }
       }
 
@@ -188,14 +189,10 @@ export default {
         Schedule refresh based on whether there are pending aggregate requests.
        */
 
-      const aggReqRes = this.findAggregateRequests({ query: {
-        isPending: true
-      }})
-
-      this.startTimer(aggReqRes.data & aggReqRes.data.length ? 20000 : 600000)
+      this.startTimer(isAggPending ? 20000 : 600000)
     },
 
-    async fetchCurrDatapoint ({station, time, tagKey, label}) {
+    async fetchCurrDatapoint ({ station, time, tagKey, label }) {
       const datastream = this.findDatastream({ query: {
         attributes: { $exists: false },
         station_id: station._id,

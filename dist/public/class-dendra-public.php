@@ -3,7 +3,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       http://example.com
+ * @link       http://dendra.science
  * @since      1.0.0
  *
  * @package    Dendra
@@ -18,7 +18,7 @@
  *
  * @package    Dendra
  * @subpackage Dendra/public
- * @author     Your Name <email@example.com>
+ * @author     J. Scott Smith <scott@newleafsolutionsinc.com>
  */
 class Dendra_Public {
 
